@@ -1,8 +1,12 @@
 package com.example.p2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,7 +34,16 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                takePicture();
+                // Checks to see if permission is granted to the application to use the camera. If not
+                // the user is prompted to allow permission
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_CALENDAR)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                    takePicture();
+                } else {
+                    // Permission not granted
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, 1);
+                }
             }
         });
     }

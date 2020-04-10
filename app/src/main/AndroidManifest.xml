@@ -7,9 +7,8 @@
 
     // Camera Features - Declares use of camera features
     <uses-feature android:name="android.hardware.camera" />
-
     // Camera Required - States whether a camera is required for an application to operate
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+<!--    <uses-feature android:name="android.hardware.camera" android:required="true" />-->
 
     // Storage Permission - Allows us to store videos and pictures to external storage (SD Card)
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
