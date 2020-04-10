@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view){
                 // Checks to see if permission is granted to the application to use the camera. If not
                 // the user is prompted to allow permission
-                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_CALENDAR)
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)
                         == PackageManager.PERMISSION_GRANTED) {
                     // Permission granted
                     takePicture();
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private void takePicture(){
         Intent picture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(picture, 0);
+
     }
 
     // when the intent is resolved it takes the data from the intent(in this case, the picture)
