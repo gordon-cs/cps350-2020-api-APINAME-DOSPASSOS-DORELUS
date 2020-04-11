@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class PhotoActivity extends AppCompatActivity {
 
     private ImageView myImage;
     private Button pictureButton, complexCameraButton;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_photo);
 
         // Binds myImage variable to the ImageView with the Id "MyImage"
         myImage = (ImageView)findViewById(R.id.MyImage);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         pictureButton = (Button)findViewById(R.id.take_picture);
 
         // Binds complexCameraButton variable to the Button with the Id "Button"
-        complexCameraButton = (Button)findViewById(R.id.complex_camera);
+        complexCameraButton = (Button)findViewById(R.id.video_camera);
 
         // Creates a on click listener that calls our take picture function when ever our button is clicked
         pictureButton.setOnClickListener(new View.OnClickListener(){
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 /* Checks to see if permission is granted to the application to use the camera. If not
                  * the user is prompted to allow permission
                  */
-                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)
+                if (ContextCompat.checkSelfPermission(PhotoActivity.this, Manifest.permission.CAMERA)
                         == PackageManager.PERMISSION_GRANTED) {
                     // Permission granted - Calls function to take a picture
                     takePicture();
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     /* Permission not granted - Ask user for permission again. If they deny it
                      * indefinitely, nothing will appear
                      */
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, 1);
+                    ActivityCompat.requestPermissions(PhotoActivity.this, new String[] {Manifest.permission.CAMERA}, 1);
                 }
             }
         });
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         complexCameraButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent nextAcitvity = new Intent(getBaseContext(), ComplexCamera.class);
+                Intent nextAcitvity = new Intent(getBaseContext(), VideoActivity.class);
                 startActivity(nextAcitvity);
             }
         });

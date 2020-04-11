@@ -2,24 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.p2">
 
+    // Camera Permission - Requests permission to use a device camera
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera" /> <!-- <uses-feature android:name="android.hardware.camera" android:required="true" /> -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    // Camera Features - Declares use of camera features
+    <uses-feature android:name="android.hardware.camera2.full" />
+    // Camera Required - States whether a camera is required for an application to operate
+    <!--    <uses-feature android:name="android.hardware.camera" android:required="true" />-->
 
-    <uses-feature android:name="android.hardware.location.gps" />
+    // Audio Recording Permission - Requests permission to capture audio while recording video
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    // Location Permission - Allows the application to tag GPS location to images
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" /> // Android 5.0 or higher requires gps permission
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Camera API Intent"
+        android:label="Camera API"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ComplexCamera"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".VideoActivity"></activity>
+        <activity android:name=".PhotoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
