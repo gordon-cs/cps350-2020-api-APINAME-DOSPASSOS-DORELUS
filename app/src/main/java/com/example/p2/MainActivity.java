@@ -13,11 +13,13 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageView myImage;
-    private Button button;
+    private Button pictureButton, complexCameraButton;
+    private TextView mainText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,14 @@ public class MainActivity extends AppCompatActivity {
         // Binds myImage variable to the ImageView with the Id "MyImage"
         myImage = (ImageView)findViewById(R.id.MyImage);
 
-        // Binds button variable to the Button with the Id "Button"
-        button = (Button)findViewById(R.id.Button);
+        // Binds pictureButton variable to the Button with the Id "Button"
+        pictureButton = (Button)findViewById(R.id.take_picture);
+
+        // Binds complexCameraButton variable to the Button with the Id "Button"
+        complexCameraButton = (Button)findViewById(R.id.complex_camera);
 
         // Creates a on click listener that calls our take picture function when ever our button is clicked
-        button.setOnClickListener(new View.OnClickListener(){
+        pictureButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 /* Checks to see if permission is granted to the application to use the camera. If not
@@ -47,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
                      */
                     ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, 1);
                 }
+            }
+        });
+
+        // Creates a on click listener that goes to a new activity that shows our own personal camera
+        complexCameraButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent nextAcitvity = new Intent(getBaseContext(), ComplexCamera.class);
+                startActivity(nextAcitvity);
             }
         });
     }
@@ -67,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             Bitmap pic = (Bitmap)data.getExtras().get("data");
             myImage.setImageBitmap(pic);
+
+            // Sets the text of the main text of the application to let the user know that a picture was taken
+            mainText = findViewById(R.id.mainText);
+            mainText.setText("Picture has been taken. View below!");
         }
+
+
     }
 }
