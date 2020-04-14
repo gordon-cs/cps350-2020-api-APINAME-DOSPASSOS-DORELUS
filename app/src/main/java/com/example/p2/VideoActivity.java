@@ -3,8 +3,12 @@ package com.example.p2;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -89,11 +93,24 @@ public class VideoActivity extends AppCompatActivity {
 
     // Starts the intent for capturing video
     public void captureVideo() {
-        Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        /* Checks to see if permission is granted to the application to use the camera. If not
+         * the user is prompted to allow permission
+         */
+        if (ContextCompat.checkSelfPermission(VideoActivity.this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Permission granted - Starts the intent to record a video
+            Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
-        if (videoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(videoIntent, VIDEO_REQUEST);
+            if (videoIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(videoIntent, VIDEO_REQUEST);
+            }
+        } else {
+            /* Permission not granted - Ask user for permission again. If they deny it
+             * indefinitely, nothing will appear
+             */
+            ActivityCompat.requestPermissions(VideoActivity.this, new String[] {Manifest.permission.CAMERA}, 1);
         }
+
     }
 
     @Override

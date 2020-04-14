@@ -2,20 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.p2">
 
-    // Camera Permission - Requests permission to use a device camera
+    <!-- Camera Permission - Requests permission to use a device camera -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-    // Camera Features - Declares use of camera features
+    <!-- Camera Features - Declares use of camera features -->
     <uses-feature android:name="android.hardware.camera2.full" />
-    // Camera Required - States whether a camera is required for an application to operate
-    <!--    <uses-feature android:name="android.hardware.camera" android:required="true" />-->
+    <!-- Camera Required - States whether a camera is required for an application to operate -->
+    <!-- <uses-feature android:name="android.hardware.camera" android:required="true" /> -->
 
-    // Audio Recording Permission - Requests permission to capture audio while recording video
+    <!-- Audio Recording Permission - Requests permission to capture audio while recording video -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-    // Location Permission - Allows the application to tag GPS location to images
+    <!-- Location Permission - Allows the application to tag GPS location to images -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-feature android:name="android.hardware.location.gps" /> // Android 5.0 or higher requires gps permission
+    <uses-feature android:name="android.hardware.location.gps" /> <!-- Android 5.0 or higher requires gps permission -->
 
     <application
         android:allowBackup="true"
