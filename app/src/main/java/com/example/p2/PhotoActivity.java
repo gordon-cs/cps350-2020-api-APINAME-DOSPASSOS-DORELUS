@@ -8,23 +8,49 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class PhotoActivity extends AppCompatActivity {
 
     private ImageView myImage;
     private Button pictureButton, complexCameraButton;
     private TextView mainText;
+    private ToggleButton toggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
+
+        // Binds toggle variable to the toggle button with the Id "togglebutton"
+        toggle = findViewById(R.id.togglebutton);
+
+        // creates a toggle listener that changes the way the image being rendered is displayed
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    ColorMatrix matrix = new ColorMatrix();
+                    matrix.setSaturation(0);
+                    ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+                    myImage.setColorFilter(filter);
+
+                } else {
+                    myImage.clearColorFilter();
+                }
+            }
+        });
+
 
         // Binds myImage variable to the ImageView with the Id "MyImage"
         myImage = (ImageView)findViewById(R.id.MyImage);
@@ -89,4 +115,5 @@ public class PhotoActivity extends AppCompatActivity {
 
 
     }
+
 }
